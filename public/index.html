@@ -39,6 +39,35 @@
 					}
 				});
 			}
+			function onCreateAccountBtnClicked(){
+				var userNameInput = document.getElementById("create_userNameTI").value;
+				var passwordInput = document.getElementById("create_passwordTI").value;
+				
+				var firstName = document.getElementById("create_firstNameTI").value;
+				var lastName = document.getElementById("create_lastNameTI").value;
+				var email = document.getElementById("create_emailTI").value;
+				
+				var postBody = {
+					"userName":userNameInput,
+					"pw":passwordInput,
+					"email":email, 
+					"firstName":firstName, 
+					"lastName":lastName
+				};
+				
+				jQuery.ajax ({
+					url: "api/createAccount",
+					type: "POST",
+					data: JSON.stringify(postBody),
+					dataType: "json",
+					contentType: "application/json; charset=utf-8",
+					success: function(data){
+						$( "#result" ).html( data.toString() );
+						//AuthorizationBearerToken = data.token;
+						//userObject = data;
+					}
+				});
+			}
 		</script>
 		
 		<div id="loginForm">
@@ -47,5 +76,15 @@
 			<button id="loginBtn" onclick="onLoginBtnClicked()">Submit</button>
 		</div>
 		<div id="result"></div>
+		<br/><br/><br/>
+		<div id="createAccountForm">
+			UserName: <input id="create_userNameTI" type="text"></input><br/>
+			Password: <input id="create_passwordTI" type="password"></input><br/>
+			First Name: <input id="create_firstNameTI" type="text"></input><br/>
+			Last Name: <input id="create_lastNameTI" type="text"></input><br/>
+			email: <input id="create_emailTI" type="text"></input><br/>
+			<button id="loginBtn" onclick="onCreateAccountBtnClicked()">Create Account</button><br/>
+		</div>
+		<div id="createResult"></div>
 	</body>
 </html>
