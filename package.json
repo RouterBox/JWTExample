@@ -24,7 +24,7 @@
   "homepage": "https://github.com/RouterBox/JWTExample#readme",
   "dependencies": {
     "assert": "^1.4.1",
-    "bcrypt": "^3.0.2",
+    "bcrypt": "^3.0.5",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.3.0",
     "mongodb": "^3.1.9",

@@ -2,7 +2,7 @@ const express = require('express');
 var bodyParser = require('body-parser')
 const app = express();
 var MongoClient = require('mongodb').MongoClient;
-var mongoURL = 'mongodb://localhost:27017/ServSafeCMS';
+var mongoURL = 'mongodb://localhost:27017/usersDB';
 var db;
 var usersDB;
 var assert = require('assert');
@@ -214,11 +214,10 @@ MongoClient.connect(mongoURL, function(err, mdb) {
     process.exit(1)
   } else {
 	//switch to your db.
-	db = mdb.db("test");
 	usersDB = mdb.db("usersDB");
 	//listen on a port
-    app.listen(8080, function() {
-      console.log('Listening on port 8080...')
+    app.listen(80, function() {
+      console.log('Listening on port 80...')
     })
   }
 })
