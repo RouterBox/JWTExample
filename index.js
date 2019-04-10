@@ -2,7 +2,7 @@ const express = require('express');
 var bodyParser = require('body-parser')
 const app = express();
 var MongoClient = require('mongodb').MongoClient;
-var mongoURL = 'mongodb://localhost:27017/usersDB';
+var mongoURL = 'mongodb://DATABASE_USER:DATABASE_PASSWORD@localhost:27017/usersDB';
 var db;
 var usersDB;
 var assert = require('assert');
@@ -134,6 +134,10 @@ app.post('/api/createAccount', (req, res) => {
 	
 	var userCollection = usersDB.collection('userCollection');
 	userCollection.find({"userName":reqUserName}).toArray(function(err, items) {
+		if(err){
+			console.log("an error occured:");
+			console.log(err);
+		}	
 		console.log(items);
 		console.log("-------------");
 		if(items.length > 0){
