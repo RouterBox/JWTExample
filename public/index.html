@@ -33,7 +33,7 @@
 					dataType: "json",
 					contentType: "application/json; charset=utf-8",
 					success: function(data){
-						$( "#result" ).html( "Welcome "+data.firstName+"!" );
+						$( "#result" ).html( "Welcome "+data.firstName+"!  Your authorization bearer token is: "+data.token );
 						AuthorizationBearerToken = data.token;
 						userObject = data;
 					}
@@ -68,6 +68,21 @@
 					}
 				});
 			}
+			function callPost(){
+				jQuery.ajax ({
+					url: "api/post",
+					type: "POST",
+					headers: {'Authorization':'Bearer '+AuthorizationBearerToken}
+					data: JSON.stringify({someKey:"someValue"}),
+					dataType: "json",
+					contentType: "application/json; charset=utf-8",
+					success: function(data){
+						$( "#result" ).html( data.toString() );
+						//AuthorizationBearerToken = data.token;
+						//userObject = data;
+					}
+				});
+			}
 		</script>
 		
 		<div id="loginForm">
@@ -75,6 +90,7 @@
 			Password: <input id="passwordTI" type="password"></input>
 			<button id="loginBtn" onclick="onLoginBtnClicked()">Submit</button>
 		</div>
+		<button id="loginBtn" onclick="callPost()">Call Protected route</button>
 		<div id="result"></div>
 		<br/><br/><br/>
 		<div id="createAccountForm">
